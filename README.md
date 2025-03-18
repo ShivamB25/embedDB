@@ -2,7 +2,7 @@
 > Tiny semantic search DB in one file. Zero config. Instant prototyping.
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Python Versions](https://img.shields.io/badge/python-3.7%2B-blue)
+![Python Versions](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
 **EmbedDB** is an ultra-lightweight vector database designed for rapid prototyping of semantic search and RAG applications. The entire implementation is contained in a single Python file with minimal dependencies.
