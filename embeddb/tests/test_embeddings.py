@@ -8,6 +8,7 @@ import unittest
 from unittest import mock
 
 from embeddb import EmbedDB
+from embeddb.embeddb import DEFAULT_MODEL_PATH
 
 # Check if sentence-transformers is available
 try:
@@ -54,8 +55,12 @@ class TestEmbeddings(unittest.TestCase):
         self.assertEqual(len(vector), 4)
         self.assertEqual(vector, [0.1, 0.2, 0.3, 0.4])
         
-        # Check that the model was loaded with the default model name
-        self.mock_model_class.assert_called_with('all-MiniLM-L6-v2')
+        # Check that the model was loaded with either the local path or the default model name
+        # The order of checks depends on whether DEFAULT_MODEL_PATH exists
+        if os.path.exists(DEFAULT_MODEL_PATH):
+            self.mock_model_class.assert_called_with(DEFAULT_MODEL_PATH)
+        else:
+            self.mock_model_class.assert_called_with('all-MiniLM-L6-v2')
 
     def test_embed_text_with_custom_model(self):
         """Test embedding text with a custom model path."""
@@ -122,7 +127,7 @@ class TestEmbeddings(unittest.TestCase):
         self.assertEqual(results[1]["id"], "doc1")
 
     def test_import_error(self):
-        """Test that an ImportError is raised when sentence-transformers is not available."""
+        """Test that an ImportError is raised when sentence-transformers is not installed."""
         # Mock import to simulate sentence-transformers not being available
         with mock.patch.dict('sys.modules', {'sentence_transformers': None}):
             with self.assertRaises(ImportError):

@@ -6,10 +6,19 @@ To run this example, you'll need to install the embeddings extra:
     pip install embeddb[embeddings]
 """
 
+import os
 from embeddb import EmbedDB
 
+# Path to the embedding model
+MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                         "embedding_models_cached/sentence-transformers_all-MiniLM-L6-v2")
+
+print(f"Using model from: {MODEL_PATH}")
+
 # Create a vector database with built-in embedding support
-db = EmbedDB()  # Uses all-MiniLM-L6-v2 by default
+# Using the local model (explicit path)
+db = EmbedDB(model_path=MODEL_PATH)
+print("Database created with explicit model path")
 
 # Add documents with automatic embedding
 documents = [
@@ -47,4 +56,10 @@ db.add_text("custom_doc", "This is a test document", metadata=metadata)
 
 # Retrieve and display the custom metadata
 vector, meta = db.get("custom_doc")
-print(f"Retrieved metadata: {meta}") 
+print(f"Retrieved metadata: {meta}")
+
+# Alternative: Create database with automatic model detection
+print("\nCreating another database with automatic model detection:")
+auto_db = EmbedDB()  # Will use the local model if available
+vector = auto_db.embed_text("Testing automatic model detection")
+print(f"Successfully generated embedding with dimension: {len(vector)}") 

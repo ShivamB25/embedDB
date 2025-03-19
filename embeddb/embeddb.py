@@ -10,6 +10,10 @@ import math
 import os
 from typing import Dict, List, Optional, Tuple, Union, Any
 
+# Default path to the pre-downloaded embedding model
+DEFAULT_MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 
+                                 "embedding_models_cached/sentence-transformers_all-MiniLM-L6-v2")
+
 
 class EmbedDB:
     """
@@ -28,7 +32,7 @@ class EmbedDB:
                        If None, it will be set based on the first vector added.
             model_path: Path to a pre-downloaded sentence transformers model for embeddings.
                        If not provided but embedding functionality is used, 
-                       it will attempt to use the default model.
+                       it will use the default local model path if available.
         """
         self._vectors: Dict[str, List[float]] = {}
         self._metadata: Dict[str, Any] = {}
@@ -222,8 +226,12 @@ class EmbedDB:
             if self._model_path:
                 self._model = SentenceTransformer(self._model_path)
             else:
-                # Default model
-                self._model = SentenceTransformer('all-MiniLM-L6-v2')
+                # Check if default local model exists
+                if os.path.exists(DEFAULT_MODEL_PATH):
+                    self._model = SentenceTransformer(DEFAULT_MODEL_PATH)
+                else:
+                    # Fallback to downloading the model
+                    self._model = SentenceTransformer('all-MiniLM-L6-v2')
                 
             # Set dimension based on model if not already set
             if self._dimension is None:
