@@ -16,6 +16,7 @@ show_help() {
     echo "  lint        - Run linting checks"
     echo "  format      - Format code with black and isort"
     echo "  verify      - Verify all main commands work"
+    echo "  benchmark   - Run performance benchmarks"
     echo "  build       - Build package"
     echo "  install     - Install package in development mode"
     echo "  install-dev - Install package with development dependencies"
@@ -67,6 +68,20 @@ format_code() {
 verify_commands() {
     echo "Verifying all main commands..."
     python examples/verify_commands.py
+    echo "Done!"
+}
+
+# Run benchmarks
+run_benchmarks() {
+    echo "Running performance benchmarks..."
+    
+    # Check if benchmark dependencies are installed
+    if ! python -c "import psutil, matplotlib, numpy" &> /dev/null; then
+        echo "Installing benchmark dependencies..."
+        pip install -r examples/benchmark_requirements.txt
+    fi
+    
+    python examples/benchmark.py
     echo "Done!"
 }
 
@@ -145,6 +160,9 @@ case "$1" in
         ;;
     verify)
         verify_commands
+        ;;
+    benchmark)
+        run_benchmarks
         ;;
     build)
         build_package

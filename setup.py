@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="embeddb",
-    version="0.1.0",
+    version="0.2.0",
     author="EmbedDB Team",
     author_email="info@embeddb.example.com",
     description="Tiny semantic search DB in one file. Zero config. Instant prototyping.",

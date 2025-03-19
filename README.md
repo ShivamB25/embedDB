@@ -5,11 +5,9 @@
 ![Python Versions](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
-
+[![a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png](https://i.postimg.cc/tT6Zw9SQ/a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png)](https://postimg.cc/Q9XdWZZ0)
 
 **EmbedDB** is an ultra-lightweight vector database designed for rapid prototyping of semantic search and RAG applications. The entire implementation is contained in a single Python file with minimal dependencies.
-
-[![a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png](https://i.postimg.cc/tT6Zw9SQ/a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png)](https://postimg.cc/Q9XdWZZ0)
 
 ## Why EmbedDB?
 
@@ -36,6 +34,66 @@ pip install embeddb[embeddings]
 *That's it. No compilation. No complex dependencies.*
 
 ## Quickstart
+
+## Just 7 Commands. 2 Minutes to Get Started.
+
+EmbedDB is designed for simplicity. The entire API consists of just 7 intuitive commands:
+
+```python
+db = EmbedDB(dimension=384)       # Create a database
+db.add(id, vector, metadata)      # Add a vector
+db.search(vector, top_k=5)        # Find similar vectors
+db.get(id)                        # Retrieve a vector
+db.delete(id)                     # Remove a vector
+db.save(filepath)                 # Persist to disk
+db.load(filepath)                 # Load from disk
+```
+
+That's it. No complex configuration. No steep learning curve. Just install and start building.
+
+## How EmbedDB Differs from Other Vector Databases
+
+| Feature | EmbedDB | FAISS | Pinecone/Weaviate/etc. |
+|---------|---------|-------|------------------------|
+| Installation | `pip install embeddb` | Requires C++ compilation | Requires accounts, API keys |
+| Setup time | < 2 minutes | 10-30 minutes | 30+ minutes |
+| Dependencies | Just NumPy | BLAS, C++ toolchain | External services |
+| Learning curve | Minimal (7 commands) | Steep (many index types) | Moderate to steep |
+| Storage | Simple JSON files | Custom binary format | Cloud-hosted |
+| Best for | Rapid prototyping | Production performance | Large-scale production |
+| Metadata | Built-in JSON | Requires separate handling | Built-in |
+| Coding style | Pure Python | C++ with Python bindings | Client/server |
+
+## Performance Benchmarks
+
+While EmbedDB prioritizes ease of use over raw performance, it's still remarkably efficient for prototyping and small to medium-sized applications.
+
+### Measured Performance
+
+![Benchmark Results](https://i.postimg.cc/D0GW1qZw/benchmark-results.png)
+
+Real benchmarks show EmbedDB's efficient scaling characteristics:
+
+1. **Adding Vectors**: Consistent performance regardless of database size (~0.017ms per vector)
+2. **Search Performance**: Linear scaling from 1ms at 100 vectors to ~110ms at 10,000 vectors
+3. **Memory Efficiency**: Linear memory growth with database size (2MB at 1,000 vectors, 130MB at 10,000 vectors)
+
+### Benchmarking Results
+
+| Database Size | Add (ms/vector) | Search (ms) | Memory (MB) |
+|---------------|----------------|------------|-------------|
+| 100 vectors   | 0.0188         | 1.3        | 1.5         |
+| 1,000 vectors | 0.0166         | 11.5       | 15.4        |
+| 10,000 vectors| 0.0182         | 113.0      | 130.5       |
+
+*Benchmark details: Tests performed on a modern system using 384-dimension vectors with small metadata.*
+
+### Performance Recommendations
+
+- **<1,000 vectors**: Blazing fast with minimal memory footprint
+- **1,000-10,000 vectors**: Excellent performance for most prototyping needs
+- **10,000-100,000 vectors**: Suitable for medium-sized applications
+- **>100,000 vectors**: Consider more specialized solutions like FAISS for production
 
 ### Working with Vectors
 
