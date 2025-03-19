@@ -5,7 +5,11 @@
 ![Python Versions](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
 
+
+
 **EmbedDB** is an ultra-lightweight vector database designed for rapid prototyping of semantic search and RAG applications. The entire implementation is contained in a single Python file with minimal dependencies.
+
+[![a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png](https://i.postimg.cc/tT6Zw9SQ/a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png)](https://postimg.cc/Q9XdWZZ0)
 
 ## Why EmbedDB?
 
