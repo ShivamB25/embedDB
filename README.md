@@ -4,6 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python Versions](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Code Coverage](https://codecov.io/gh/ayushgupta4897/embedDB/branch/main/graph/badge.svg?token=d41a8633-e384-4fdc-a185-6b363f03fab2)
 
 [![a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png](https://i.postimg.cc/tT6Zw9SQ/a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png)](https://postimg.cc/Q9XdWZZ0)
 
@@ -41,8 +42,8 @@ EmbedDB is designed for simplicity. The entire API consists of just 7 intuitive 
 
 ```python
 db = EmbedDB(dimension=384)       # Create a database
-db.add(id, vector, metadata)      # Add a vector
-db.search(vector, top_k=5)        # Find similar vectors
+db.add(id, vector, metadata)      # Add a vector (or use add_text for text input)
+db.search(vector, top_k=5)        # Find similar vectors (or use search_text for text queries)
 db.get(id)                        # Retrieve a vector
 db.delete(id)                     # Remove a vector
 db.save(filepath)                 # Persist to disk
@@ -50,6 +51,8 @@ db.load(filepath)                 # Load from disk
 ```
 
 That's it. No complex configuration. No steep learning curve. Just install and start building.
+
+> **Note:** When vector embeddings are not provided (using `add_text` or `search_text`), EmbedDB internally uses the all-MiniLM-L6-v2 embedding model.
 
 ## How EmbedDB Differs from Other Vector Databases
 
@@ -70,8 +73,7 @@ While EmbedDB prioritizes ease of use over raw performance, it's still remarkabl
 
 ### Measured Performance
 
-![Benchmark Results](https://i.postimg.cc/D0GW1qZw/benchmark-results.png)
-
+[![Benchmark Results](https://i.postimg.cc/JztnRXVb/output-1.png)](https://postimg.cc/gxFdDn0J)
 Real benchmarks show EmbedDB's efficient scaling characteristics:
 
 1. **Adding Vectors**: Consistent performance regardless of database size (~0.017ms per vector)
@@ -82,7 +84,7 @@ Real benchmarks show EmbedDB's efficient scaling characteristics:
 
 | Database Size | Add (ms/vector) | Search (ms) | Memory (MB) |
 |---------------|----------------|------------|-------------|
-| 100 vectors   | 0.0188         | 1.3        | 1.5         |
+| 100 vectors   | 0.00588        | 1.3        | 1.5         |
 | 1,000 vectors | 0.0166         | 11.5       | 15.4        |
 | 10,000 vectors| 0.0182         | 113.0      | 130.5       |
 
@@ -137,7 +139,6 @@ results = db.search_text("How do I find similar documents?")
 for result in results:
     print(f"Match: {result['metadata']['text']}")
 ```
-
 ## Complete RAG Example
 
 Here's a complete Retrieval-Augmented Generation implementation in under 30 lines:
