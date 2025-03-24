@@ -4,7 +4,7 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Python Versions](https://img.shields.io/badge/python-3.9%2B-blue)
 ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Code Coverage](https://codecov.io/gh/ayushgupta4897/embedDB/branch/main/graph/badge.svg?token=d41a8633-e384-4fdc-a185-6b363f03fab2)
+[![codecov](https://codecov.io/github/ayushgupta4897/embedDB/graph/badge.svg?token=R87SORPFMG)](https://codecov.io/github/ayushgupta4897/embedDB)
 
 [![a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png](https://i.postimg.cc/tT6Zw9SQ/a-minimalist-logo-design-for-embed-db-th-DWEWPgle-SR6o-L6-Qfi-RTnj-A-Pd-n0a-Ww-Sl-OZHIO2h-Jm-Q0g.png)](https://postimg.cc/Q9XdWZZ0)
 
