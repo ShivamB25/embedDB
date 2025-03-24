@@ -10,8 +10,10 @@ import os
 from embeddb import EmbedDB
 
 # Path to the embedding model
-MODEL_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                         "embedding_models_cached/sentence-transformers_all-MiniLM-L6-v2")
+MODEL_PATH = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "embedding_models_cached/sentence-transformers_all-MiniLM-L6-v2",
+)
 
 print(f"Using model from: {MODEL_PATH}")
 
@@ -25,13 +27,13 @@ documents = [
     "EmbedDB is a lightweight vector database for rapid prototyping.",
     "Vector databases store embeddings for semantic search applications.",
     "Semantic search finds documents based on meaning, not just keywords.",
-    "EmbedDB provides a simple API in a single Python file."
+    "EmbedDB provides a simple API in a single Python file.",
 ]
 
 # Add each document to the database
 for i, doc in enumerate(documents):
     db.add_text(f"doc{i}", doc)
-    
+
 print(f"Added {len(documents)} documents to the database.\n")
 
 # Perform a search with text query
@@ -51,7 +53,11 @@ print("\nDatabase saved to text_db.json")
 
 # Example with custom metadata
 print("\nAdding a document with custom metadata:")
-metadata = {"text": "This is a test document", "category": "test", "tags": ["example", "embeddings"]}
+metadata = {
+    "text": "This is a test document",
+    "category": "test",
+    "tags": ["example", "embeddings"],
+}
 db.add_text("custom_doc", "This is a test document", metadata=metadata)
 
 # Retrieve and display the custom metadata
@@ -62,4 +68,4 @@ print(f"Retrieved metadata: {meta}")
 print("\nCreating another database with automatic model detection:")
 auto_db = EmbedDB()  # Will use the local model if available
 vector = auto_db.embed_text("Testing automatic model detection")
-print(f"Successfully generated embedding with dimension: {len(vector)}") 
+print(f"Successfully generated embedding with dimension: {len(vector)}")

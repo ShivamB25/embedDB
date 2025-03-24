@@ -36,8 +36,10 @@ query = [0.9, 0.1, 0.0]
 results = db.search(query, top_k=2)
 print(f"✅ Search completed with {len(results)} results:")
 for i, result in enumerate(results):
-    print(f"   {i+1}. {result['id']} - {result['metadata']['description']} "
-          f"(Similarity: {result['similarity']:.4f})")
+    print(
+        f"   {i+1}. {result['id']} - {result['metadata']['description']} "
+        f"(Similarity: {result['similarity']:.4f})"
+    )
 
 # 4. Get vector by ID
 print("\n4. Getting vector by ID")
@@ -57,7 +59,7 @@ except KeyError:
 
 # 6. Save the database
 print("\n6. Saving the database")
-with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as tmp:
+with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
     temp_path = tmp.name
 
 db.save(temp_path)
@@ -75,20 +77,24 @@ print("\nAll 7 commands verified successfully!")
 # Optional: Test text embedding if available
 try:
     print("\nBONUS: Testing text embedding functionality")
-    model_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
-                             "embedding_models_cached/sentence-transformers_all-MiniLM-L6-v2")
-    
+    model_path = os.path.join(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+        "embedding_models_cached/sentence-transformers_all-MiniLM-L6-v2",
+    )
+
     # Create a database with explicit model path
     text_db = EmbedDB(model_path=model_path)
-    
+
     # Add a text document
-    text_db.add_text("doc1", "EmbedDB is a lightweight vector database for semantic search.")
-    
+    text_db.add_text(
+        "doc1", "EmbedDB is a lightweight vector database for semantic search."
+    )
+
     # Search for similar documents
     results = text_db.search_text("How to find similar text?", top_k=1)
-    
+
     print(f"✅ Text embedding is working")
     print(f"   Query result: {results[0]['metadata']['text']}")
     print(f"   Similarity score: {results[0]['similarity']:.4f}")
 except Exception as e:
-    print(f"ℹ️ Text embedding test skipped: {str(e)}") 
+    print(f"ℹ️ Text embedding test skipped: {str(e)}")

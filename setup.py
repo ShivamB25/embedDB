@@ -29,4 +29,4 @@ setup(
     extras_require={
         "embeddings": ["sentence-transformers>=2.0.0"],
     },
-) 
+)

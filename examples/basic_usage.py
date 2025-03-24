@@ -23,7 +23,9 @@ results = db.search(query_vector, top_k=2)
 print(f"Query: {query_vector}")
 print("\nResults:")
 for i, result in enumerate(results):
-    print(f"{i+1}. {result['id']} - {result['metadata']['description']} (Similarity: {result['similarity']:.4f})")
+    print(
+        f"{i+1}. {result['id']} - {result['metadata']['description']} (Similarity: {result['similarity']:.4f})"
+    )
 
 # Save the database
 db.save("example_db.json")
@@ -31,4 +33,4 @@ print("\nDatabase saved to example_db.json")
 
 # Load the database
 loaded_db = EmbedDB.load("example_db.json")
-print(f"Loaded database with {loaded_db.count()} vectors") 
+print(f"Loaded database with {loaded_db.count()} vectors")
